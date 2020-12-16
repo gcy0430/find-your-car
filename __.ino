@@ -1,7 +1,7 @@
-#include <TinyGPS++.h>
+#include <TinyGPS++.h>  //用来解析GPS数据的库
 #include <SoftwareSerial.h>
-#define apikey "lJOULFScfN5Xvn2Df4Lg4t3G9Pc= "
-#define deviceid 657054151
+#define apikey "lJOULFScfN5Xvn2Df4Lg4t3G9Pc= " //APIkey
+#define deviceid 657054151  //设备ID
 #define dsName "longitude"
 #define dsName2 "latitude"
 #define LINEBREAK "\r\n"
@@ -11,8 +11,8 @@ double longitude;
 
 
 TinyGPSPlus gps;
-SoftwareSerial ss(4, 3);
-SoftwareSerial mySerial(10, 11);
+SoftwareSerial ss(4, 3); //定义GPS模块RX/TX串口
+SoftwareSerial mySerial(10, 11); //定义4G模块RX/TX串口
 
 void updateSerial()
 {
@@ -31,7 +31,7 @@ void updateSerial()
      mySerial.write(Serial.read());
     }   
 }
-void sendlocation()
+void sendlocation()  //上传GPS数据
 {
   mySerial.println("AT+CIPSTATUS ");//查询状态
   updateSerial();
@@ -143,8 +143,8 @@ void setup()
   {
     Serial.begin(9600); //set the baud rate of serial port to 9600;
     ss.begin(9600); //set the GPS baud rate to 9600;
-    mySerial.begin(9600);
-    ss.listen();
+    mySerial.begin(9600); //4G模块波特率初始化
+    ss.listen(); //一定要有这句语句！！！
   }
 
 void loop()
